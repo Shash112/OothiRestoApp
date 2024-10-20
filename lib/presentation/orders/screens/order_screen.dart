@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:restorant/common/widgets/textfield/custom_textfield.dart';
 
+import '../../dashboard/widgets/order_card.dart';
+
 class OrderScreen extends StatefulWidget {
   const OrderScreen({super.key});
 
@@ -13,45 +15,77 @@ class _OrderScreenState extends State<OrderScreen> {
   final TextEditingController _searchController = TextEditingController();
   final List orders = [
     {
-      "orderId": "001",
-      "customerName": "John Doe",
-      "productName": "Smartphone",
-      "quantity": 2,
-      "price": 500,
-      "orderDate": "2024-10-19",
-      "status": "Shipped",
-      "totalAmount": 1000,
+      'dishName': "Chicken Tikka Pizza",
+      'orderId': "X56495408",
+      'qty': 1,
+      'price': 180.0,
+      'imageUrl': "https://www.zorabian.com/wp-content/uploads/2022/11/Make-Reshmi-Chicken-Tikka-Pizza-in-just-30-mins-%E2%80%93-Its-Friyaay.jpg",
+      'status': "pending",
+      'dateTime': DateTime.now()
     },
     {
-      "orderId": "002",
-      "customerName": "Jane Smith",
-      "productName": "Laptop",
-      "quantity": 1,
-      "price": 1200,
-      "orderDate": "2024-10-18",
-      "status": "Delivered",
-      "totalAmount": 1200,
+      'dishName': "Burger",
+      'orderId': "X56495408",
+      'qty': 4,
+      'price': 320.0,
+      'imageUrl': "https://www.foodandwine.com/thmb/DI29Houjc_ccAtFKly0BbVsusHc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/crispy-comte-cheesburgers-FT-RECIPE0921-6166c6552b7148e8a8561f7765ddf20b.jpg",
+      'status': "Preparing",
+      'dateTime': DateTime.now()
     },
     {
-      "orderId": "003",
-      "customerName": "Robert Johnson",
-      "productName": "Wireless Mouse",
-      "quantity": 3,
-      "price": 20,
-      "orderDate": "2024-10-17",
-      "status": "Pending",
-      "totalAmount": 60,
+      'dishName': "Butter Chicken",
+      'orderId': "X56495408",
+      'qty': 2,
+      'price': 240.0,
+      'imageUrl': "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSegneEIjn7BXdB19uN6O6G3V030wDdHJC1Sw&s",
+      'status': "pending",
+      'dateTime': DateTime.now()
     },
     {
-      "orderId": "004",
-      "customerName": "Emily Davis",
-      "productName": "Headphones",
-      "quantity": 2,
-      "price": 150,
-      "orderDate": "2024-10-19",
-      "status": "Canceled",
-      "totalAmount": 300,
+      'dishName': "Chicken Biryani",
+      'orderId': "X56495408",
+      'qty': 2,
+      'price': 300.0,
+      'imageUrl': "https://www.licious.in/blog/wp-content/uploads/2022/06/chicken-hyderabadi-biryani-01.jpg",
+      'status': "preparing",
+      'dateTime': DateTime.now()
     },
+    {
+      'dishName': "Chicken Tikka Pizza",
+      'orderId': "X56495408",
+      'qty': 1,
+      'price': 180.0,
+      'imageUrl': "https://www.zorabian.com/wp-content/uploads/2022/11/Make-Reshmi-Chicken-Tikka-Pizza-in-just-30-mins-%E2%80%93-Its-Friyaay.jpg",
+      'status': "pending",
+      'dateTime': DateTime.now()
+    },
+    {
+      'dishName': "Burger",
+      'orderId': "X56495408",
+      'qty': 4,
+      'price': 320.0,
+      'imageUrl': "https://www.foodandwine.com/thmb/DI29Houjc_ccAtFKly0BbVsusHc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/crispy-comte-cheesburgers-FT-RECIPE0921-6166c6552b7148e8a8561f7765ddf20b.jpg",
+      'status': "Preparing",
+      'dateTime': DateTime.now()
+    },
+    {
+      'dishName': "Butter Chicken",
+      'orderId': "X56495408",
+      'qty': 2,
+      'price': 240.0,
+      'imageUrl': "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSegneEIjn7BXdB19uN6O6G3V030wDdHJC1Sw&s",
+      'status': "pending",
+      'dateTime': DateTime.now()
+    },
+    {
+      'dishName': "Chicken Biryani",
+      'orderId': "X56495408",
+      'qty': 2,
+      'price': 300.0,
+      'imageUrl': "https://www.licious.in/blog/wp-content/uploads/2022/06/chicken-hyderabadi-biryani-01.jpg",
+      'status': "preparing",
+      'dateTime': DateTime.now()
+    }
   ];
 
   @override
@@ -61,63 +95,33 @@ class _OrderScreenState extends State<OrderScreen> {
       child: SafeArea(
           child: Column(
             children: [
-              Row(
-                children: [
-                  Expanded(child: CustomTextField(hintText: "Search", controller: _searchController, noOfLines: 1, keyboardType: TextInputType.text, obscure: false,)),
-                  IconButton(onPressed: (){}, icon: Icon(Icons.filter_alt))
-                ],
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  children: [
+                    Expanded(child: CustomTextField(hintText: "Search", controller: _searchController, noOfLines: 1, keyboardType: TextInputType.text, obscure: false,)),
+                    IconButton(onPressed: (){}, icon: Icon(Icons.filter_alt))
+                  ],
+                ),
               ),
-              // SingleChildScrollView(
-              //   scrollDirection: Axis.horizontal,
-              //   child: Column(
-              //     children: [
-              //       Padding(
-              //         padding: const EdgeInsets.all(8.0),
-              //         child: Row(
-              //           mainAxisAlignment: MainAxisAlignment.spaceAround,
-              //           children: const [
-              //             SizedBox(width: 100, child: Text('Order ID', textAlign: TextAlign.center)),
-              //             SizedBox(width: 100, child: Text('Product Name', textAlign: TextAlign.center)),
-              //             SizedBox(width: 100, child: Text('Quantity', textAlign: TextAlign.center)),
-              //             SizedBox(width: 100, child: Text('Order Date', textAlign: TextAlign.center)),
-              //             SizedBox(width: 100, child: Text('Status', textAlign: TextAlign.center)),
-              //             SizedBox(width: 100, child: Text('Total Amount', textAlign: TextAlign.center)),
-              //           ],
-              //         ),
-              //       ),
-              //       Expanded(
-              //         child: ListView.builder(
-              //           itemCount: orders.length,
-              //             itemBuilder: (context, index) {
-              //             final order = orders[index];
-              //             return Padding(
-              //               padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
-              //               child: Card(
-              //                 child: Padding(
-              //                   padding: const EdgeInsets.all(8.0),
-              //                   child: Row(
-              //                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-              //                     children: [
-              //                       SizedBox(width: 100, child: Text(order['orderId'], textAlign: TextAlign.center)),
-              //                       // Expanded(child: Text(order['customerName'], textAlign: TextAlign.center)),
-              //                       SizedBox(width: 100, child: Text(order['productName'], textAlign: TextAlign.center)),
-              //                       SizedBox(width: 100, child: Text(order['quantity'].toString(), textAlign: TextAlign.center)),
-              //                       // Expanded(child: Text('\$${order['price'].toString()}', textAlign: TextAlign.center)),
-              //                       SizedBox(width: 100, child: Text(order['orderDate'], textAlign: TextAlign.center)),
-              //                       SizedBox(width: 100, child: Text(order['status'], textAlign: TextAlign.center)),
-              //                       SizedBox(width: 100, child: Text('\$${order['totalAmount'].toString()}', textAlign: TextAlign.center)),
-              //                     ],
-              //                   ),
-              //                 ),
-              //               ),
-              //             );
-              //             }
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // )
-
+              Expanded(
+                child: ListView.builder(
+                    // shrinkWrap: true,
+                    itemCount: orders.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      print(orders[index]);
+                      return OrderCard(
+                        dishName: orders[index]['dishName'],
+                        orderId: orders[index]['orderId'],
+                        qty: orders[index]['qty'],
+                        price: orders[index]['price'],
+                        status: orders[index]['status'],
+                        imageUrl: orders[index]['imageUrl'],
+                        dateTime: orders[index]['dateTime'],
+                      );
+                    }
+                ),
+              ),
             ],
           )
       ),

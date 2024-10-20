@@ -85,7 +85,7 @@ class _IntroScreenState extends State<IntroScreen> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (BuildContext context) => HomeScreen()
+                              builder: (BuildContext context) => HomeScreen(selectedIndex: 2,)
                           )
                       );
                     } else {

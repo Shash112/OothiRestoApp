@@ -7,19 +7,20 @@ import 'package:restorant/presentation/orders/screens/order_screen.dart';
 import 'package:restorant/presentation/reports/screens/report_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  int selectedIndex;
+  HomeScreen({super.key, required this.selectedIndex});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 2;
+
   final List<String> _tabsName = ["Menu", "Orders","Dashboard", "Report", "More"];
   
   _updateIndex(int index) {
     setState(() {
-      _selectedIndex = index;
+      widget.selectedIndex = index;
     });
   }
 
@@ -38,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(_tabsName[_selectedIndex]),
+          title: Text(_tabsName[widget.selectedIndex]),
           automaticallyImplyLeading: false,
           actions: [
             IconButton(
@@ -47,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           ],
         ),
-        body: tabs.elementAt(_selectedIndex),
+        body: tabs.elementAt(widget.selectedIndex),
         extendBody: true,
         floatingActionButton: Container(
           height: 80,
@@ -55,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: FloatingActionButton(
             shape: CircleBorder(),
             onPressed: (){_updateIndex(2);},
-            child: Icon(Icons.home, size: 40, color: _selectedIndex == 2 ? AppColors.primary : AppColors.placeholder),
+            child: Icon(Icons.home, size: 40, color: widget.selectedIndex == 2 ? AppColors.primary : AppColors.placeholder),
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -67,11 +68,11 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              IconButton(onPressed: (){_updateIndex(0);}, icon: Icon(Icons.grid_view, size: 32, color: _selectedIndex == 0 ? AppColors.primary : AppColors.placeholder)),
-              IconButton(onPressed: (){_updateIndex(1);}, icon: Icon(Icons.reorder, size: 32, color: _selectedIndex == 1 ? AppColors.primary : AppColors.placeholder)),
+              IconButton(onPressed: (){_updateIndex(0);}, icon: Icon(Icons.grid_view, size: 32, color: widget.selectedIndex == 0 ? AppColors.primary : AppColors.placeholder)),
+              IconButton(onPressed: (){_updateIndex(1);}, icon: Icon(Icons.reorder, size: 32, color: widget.selectedIndex == 1 ? AppColors.primary : AppColors.placeholder)),
               SizedBox(height: 40, width: 40,),
-              IconButton(onPressed: (){_updateIndex(3);}, icon: Icon(Icons.report, size: 32, color: _selectedIndex == 3 ? AppColors.primary : AppColors.placeholder)),
-              IconButton(onPressed: (){_updateIndex(4);}, icon: Icon(Icons.more_horiz, size: 32, color: _selectedIndex == 4 ? AppColors.primary : AppColors.placeholder)),
+              IconButton(onPressed: (){_updateIndex(3);}, icon: Icon(Icons.report, size: 32, color: widget.selectedIndex == 3 ? AppColors.primary : AppColors.placeholder)),
+              IconButton(onPressed: (){_updateIndex(4);}, icon: Icon(Icons.more_horiz, size: 32, color: widget.selectedIndex == 4 ? AppColors.primary : AppColors.placeholder)),
              ],
           ),
         ),
